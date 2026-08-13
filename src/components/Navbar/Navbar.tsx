@@ -6,7 +6,6 @@ import {
   FiSearch,
   FiUser,
   FiGlobe,
-  FiChevronDown,
 } from 'react-icons/fi'
 
 import './Navbar.css'
