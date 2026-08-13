@@ -1,0 +1,55 @@
+.pocket-home {
+  width: 100%;
+  min-height: 100vh;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.story-section {
+  margin-bottom: 45px;
+}
+
+.story-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.story-section-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.rail-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.rail-arrow {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: #111;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.rail-arrow:hover {
+  opacity: 0.8;
+}
+
+.story-rail {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.story-rail::-webkit-scrollbar {
+  display: none;
+}

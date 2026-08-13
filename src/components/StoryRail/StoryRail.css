@@ -1,0 +1,156 @@
+/* =========================================================
+   STORY SECTION
+========================================================= */
+
+.story-section {
+  width: 100%;
+  margin-bottom: 30px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid #e6e2df;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.story-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 3px;
+  margin-bottom: 46px;
+}
+
+.story-section-header h2 {
+  margin: 0;
+
+  color: #1821cb;
+
+  font-size: 25px;
+  font-weight: 500;
+
+  letter-spacing: -0.4px;
+}
+
+
+/* =========================================================
+   ARROW CONTROLS
+========================================================= */
+
+.rail-controls {
+  display: flex;
+  align-items: center;
+
+  gap: 30px;
+
+  padding-right: 22px;
+}
+
+.rail-arrow {
+  width: 30px;
+  height: 30px;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #5b5b5b;
+
+  font-size: 34px;
+  font-weight: 300;
+
+  line-height: 20px;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.rail-arrow:first-child {
+  color: #9a9a9a;
+}
+
+.rail-arrow:hover {
+  color: #1821cb;
+
+  transform: scale(1.15);
+}
+
+
+/* =========================================================
+   HORIZONTAL STORY RAIL
+========================================================= */
+
+.story-rail {
+  display: flex;
+
+  gap: 15px;
+
+  width: 100%;
+
+  padding: 0 3px 12px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-behavior: smooth;
+
+  scrollbar-width: none;
+}
+
+.story-rail::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .story-section-header {
+    margin-bottom: 25px;
+
+    padding: 0 14px;
+  }
+
+  .story-section-header h2 {
+    font-size: 21px;
+  }
+
+  .rail-controls {
+    gap: 12px;
+
+    padding-right: 0;
+  }
+
+  .rail-arrow {
+    font-size: 29px;
+  }
+
+  .story-rail {
+    padding-left: 14px;
+
+    gap: 10px;
+  }
+}
+
+
+@media (max-width: 480px) {
+
+  .story-section-header h2 {
+    font-size: 19px;
+  }
+
+  .story-section {
+    margin-bottom: 20px;
+  }
+
+}
