@@ -1,0 +1,144 @@
+.story-details {
+  min-height: 100vh;
+  padding: 40px;
+  background: #f7f7f7;
+  box-sizing: border-box;
+}
+
+.back-button {
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.story-details-header {
+  display: flex;
+  gap: 35px;
+  max-width: 1100px;
+  margin: 0 auto 50px;
+}
+
+.story-details-image {
+  width: 280px;
+  height: 380px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.story-details-info {
+  flex: 1;
+  padding-top: 20px;
+}
+
+.story-details-info h1 {
+  margin: 0 0 10px;
+  font-size: 40px;
+}
+
+.story-author {
+  color: #777;
+  font-size: 16px;
+}
+
+.story-meta {
+  display: flex;
+  gap: 20px;
+  margin: 20px 0;
+  color: #555;
+}
+
+.story-description {
+  max-width: 700px;
+  line-height: 1.7;
+  color: #555;
+}
+
+.start-button {
+  margin-top: 20px;
+  padding: 13px 25px;
+  border: none;
+  border-radius: 8px;
+  background: #111;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.episodes-section {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.episodes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.episodes-header h2 {
+  margin: 0;
+}
+
+.episodes-header span {
+  color: #777;
+}
+
+.episodes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.episode-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.episode-number {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #eee;
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+.episode-info {
+  flex: 1;
+}
+
+.episode-info h3 {
+  margin: 0 0 5px;
+  font-size: 16px;
+}
+
+.episode-info p {
+  margin: 0;
+  color: #888;
+  font-size: 13px;
+}
+
+.episode-play-button {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: #111;
+  color: white;
+  cursor: pointer;
+}
+
+.episode-play-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
