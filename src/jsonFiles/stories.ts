@@ -1,5 +1,4 @@
 import type { Story } from '../types/story'
-import coverImage from '../assets/cover.png'
 const story1 = '/images/story1.png'
 const story2= '/images/story2.png'
 const story3= '/images/story3.png'

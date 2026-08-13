@@ -14,7 +14,10 @@ function App() {
 
     <BrowserRouter>
 
-    <Navbar />
+    <Navbar
+  onOpenProfile={() => {}}
+  profileName=""
+/>
 
       <Routes>
 
