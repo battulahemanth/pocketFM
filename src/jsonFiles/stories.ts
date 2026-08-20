@@ -1,7 +1,10 @@
 import type { Story } from '../types/story'
+
 const story1 = '/images/story1.png'
-const story2= '/images/story2.png'
-const story3= '/images/story3.png'
+const story2 = '/images/story2.png'
+const story3 = '/images/story3.png'
+const story4 = '/images/story4.png'
+const story5 = '/images/story5.png'
 
 export const stories: Story[] = [
   {
@@ -15,6 +18,7 @@ export const stories: Story[] = [
     subcategory: 'Adventure',
     description:
       'A mysterious magical journey begins when Krishna discovers a hidden power connected to an ancient secret.',
+
     episodes: [
       {
         id: 'ep1',
@@ -65,6 +69,7 @@ export const stories: Story[] = [
     subcategory: 'Magic',
     description:
       'An ancient ring holds a mysterious power that changes everything.',
+
     episodes: [
       {
         id: 'ep6',
@@ -90,10 +95,70 @@ export const stories: Story[] = [
     rating: '4.6',
     plays: '750K',
     image: story3,
-    category: 'drama',
-    subcategory: 'comady',
+    category: 'Drama',
+    subcategory: 'Comedy',
     description:
       'A group of friends enter a mysterious forest and discover something unexpected.',
+
+    episodes: [
+      {
+        id: 'ep8',
+        title: 'Into the Forest',
+        duration: '17:30',
+        audioUrl: '/audio/episode-8.mp3',
+        locked: false,
+      },
+      {
+        id: 'ep9',
+        title: 'The Dark Path',
+        duration: '20:45',
+        audioUrl: '/audio/episode-9.mp3',
+        locked: true,
+      },
+    ],
+  },
+
+  {
+    id: '4',
+    title: 'Forest Mystery',
+    author: 'Hemanth',
+    rating: '4.6',
+    plays: '750K',
+    image: story4,
+    category: 'Drama',
+    subcategory: 'Comedy',
+    description:
+      'A group of friends enter a mysterious forest and discover something unexpected.',
+
+    episodes: [
+      {
+        id: 'ep8',
+        title: 'Into the Forest',
+        duration: '17:30',
+        audioUrl: '/audio/episode-8.mp3',
+        locked: false,
+      },
+      {
+        id: 'ep9',
+        title: 'The Dark Path',
+        duration: '20:45',
+        audioUrl: '/audio/episode-9.mp3',
+        locked: true,
+      },
+    ],
+  },
+  {
+    id: '5 ',
+    title: 'Forest Mystery',
+    author: 'Hemanth',
+    rating: '4.6',
+    plays: '750K',
+    image: story5,
+    category: 'Drama',
+    subcategory: 'Comedy',
+    description:
+      'A group of friends enter a mysterious forest and discover something unexpected.',
+
     episodes: [
       {
         id: 'ep8',
