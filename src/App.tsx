@@ -1,4 +1,4 @@
-import {BrowserRouter,  Routes,  Route,} from 'react-router-dom'
+import { BrowserRouter, Routes, Route, } from 'react-router-dom'
 
 import HomePage from './pages/Home/HomePage'
 
@@ -14,11 +14,11 @@ function App() {
 
     <BrowserRouter>
 
-    <Navbar
+     <Navbar
   onOpenProfile={() => {}}
-  profileName=""
+          profileName=""
 />      <Routes>
-
+      
         {/* HOME */}
 
         <Route
@@ -32,7 +32,7 @@ function App() {
           path="/story/:id"
           element={<StoryDetails />}
         />
-      
+
 
 
         {/* Episode Player */}
@@ -48,7 +48,7 @@ function App() {
       <Footer />
 
     </BrowserRouter>
-    
+
   )
 }
 

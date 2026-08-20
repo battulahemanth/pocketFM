@@ -3,7 +3,7 @@ export type Episode = {
   title: string
   duration: string
   audioUrl: string
-  locked?: boolean
+  locked: boolean
 }
 
 export type Story = {
@@ -14,7 +14,7 @@ export type Story = {
   plays: string
   image: string
   category: string
-  subcategory?: string
+  subcategory: string
   description: string
   episodes: Episode[]
 }
