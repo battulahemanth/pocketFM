@@ -1,54 +1,33 @@
-import { BrowserRouter, Routes, Route, } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 
 import HomePage from './pages/Home/HomePage'
-
 import StoryDetails from './pages/StoryDetails/StoryDetails'
-
 import EpisodePlayer from './pages/EpisodePlayer/EpisodePlayer'
+import AdminDashboard from './pages/AdminDashboard/AdminDashboard'
 
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 
+function AppRoutes() {
+  const location = useLocation()
+
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/story/:id" element={<StoryDetails />} />
+      <Route path="/story/:storyId/episode/:episodeId" element={<EpisodePlayer key={location.pathname} />} />
+    </Routes>
+  )
+}
+
 function App() {
   return (
-
     <BrowserRouter>
-
-     <Navbar
-  onOpenProfile={() => {}}
-          profileName=""
-/>      <Routes>
-      
-        {/* HOME */}
-
-        <Route
-          path="/"
-          element={<HomePage />}
-        />
-
-        {/* STORY DETAILS */}
-
-        <Route
-          path="/story/:id"
-          element={<StoryDetails />}
-        />
-
-
-
-        {/* Episode Player */}
-
-        <Route
-          path="/story/:storyId/episode/:episodeId"
-          element={<EpisodePlayer />}
-        />
-
-
-      </Routes>
-
+      <Navbar onOpenProfile={() => {}} profileName="" />
+      <AppRoutes />
       <Footer />
-
     </BrowserRouter>
-
   )
 }
 

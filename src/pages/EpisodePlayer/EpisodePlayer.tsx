@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { stories } from '../../jsonFiles/stories'
@@ -16,56 +16,30 @@ function EpisodePlayer() {
   const audioRef = useRef<HTMLAudioElement>(null)
 
   const [isPlaying, setIsPlaying] = useState(false)
-
   const [currentTime, setCurrentTime] = useState(0)
-
   const [duration, setDuration] = useState(0)
 
-  // Find the story
-  const story = stories.find(
-    (item) => item.id === storyId
-  )
+  const story = stories.find((item) => item.id === storyId)
+  const episode = story?.episodes.find((item) => item.id === episodeId)
 
-  // Find the selected episode
-  const episode = story?.episodes.find(
-    (item) => item.id === episodeId
-  )
-
-  // Story or episode not found
   if (!story || !episode) {
     return (
       <main className="episode-player">
         <div className="player-error">
-
           <h1>Episode Not Found</h1>
 
-          <button
-            type="button"
-            onClick={() => navigate('/')}
-          >
+          <button type="button" onClick={() => navigate('/')}>
             Go Home
           </button>
-
         </div>
       </main>
     )
   }
 
-  // Find current episode number
-  const currentIndex =
-    story.episodes.findIndex(
-      (item) => item.id === episode.id
-    )
+  const currentIndex = story.episodes.findIndex((item) => item.id === episode.id)
+  const previousEpisode = story.episodes[currentIndex - 1]
+  const nextEpisode = story.episodes[currentIndex + 1]
 
-  // Previous episode
-  const previousEpisode =
-    story.episodes[currentIndex - 1]
-
-  // Next episode
-  const nextEpisode =
-    story.episodes[currentIndex + 1]
-
-  // Play / Pause
   const handlePlayPause = async () => {
     if (!audioRef.current) return
 
@@ -75,123 +49,69 @@ function EpisodePlayer() {
       try {
         await audioRef.current.play()
       } catch (error) {
-        console.error(
-          'Audio could not play:',
-          error
-        )
+        console.error('Audio could not play:', error)
       }
     }
   }
 
-  // Audio loaded
   const handleLoadedMetadata = () => {
     if (!audioRef.current) return
 
-    setDuration(
-      audioRef.current.duration
-    )
+    setDuration(audioRef.current.duration)
   }
 
-  // Audio time update
   const handleTimeUpdate = () => {
     if (!audioRef.current) return
 
-    setCurrentTime(
-      audioRef.current.currentTime
-    )
+    setCurrentTime(audioRef.current.currentTime)
   }
 
-  // Audio started
   const handlePlay = () => {
     setIsPlaying(true)
   }
 
-  // Audio paused
   const handlePause = () => {
     setIsPlaying(false)
   }
 
-  // Audio finished
   const handleEnded = () => {
     setIsPlaying(false)
     setCurrentTime(0)
   }
 
-  // Progress bar
-  const handleSeek = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const newTime = Number(
-      event.target.value
-    )
+  const handleSeek = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newTime = Number(event.target.value)
 
     if (!audioRef.current) return
 
-    audioRef.current.currentTime =
-      newTime
-
+    audioRef.current.currentTime = newTime
     setCurrentTime(newTime)
   }
 
-  // Convert seconds to 00:00 format
-  const formatTime = (
-    time: number
-  ) => {
+  const formatTime = (time: number) => {
     if (!Number.isFinite(time)) {
       return '00:00'
     }
 
-    const minutes = Math.floor(
-      time / 60
-    )
+    const minutes = Math.floor(time / 60)
+    const seconds = Math.floor(time % 60)
 
-    const seconds = Math.floor(
-      time % 60
-    )
-
-    return `${String(minutes).padStart(
-      2,
-      '0'
-    )}:${String(seconds).padStart(
-      2,
-      '0'
-    )}`
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
   }
 
-  // Previous episode
   const handlePrevious = () => {
     if (!previousEpisode) return
-
     if (previousEpisode.locked) return
 
-    navigate(
-      `/story/${story.id}/episode/${previousEpisode.id}`
-    )
+    navigate(`/story/${story.id}/episode/${previousEpisode.id}`)
   }
 
-  // Next episode
   const handleNext = () => {
     if (!nextEpisode) return
-
     if (nextEpisode.locked) return
 
-    navigate(
-      `/story/${story.id}/episode/${nextEpisode.id}`
-    )
+    navigate(`/story/${story.id}/episode/${nextEpisode.id}`)
   }
-
-  // Reset player when episode changes
-  useEffect(() => {
-    setIsPlaying(false)
-    setCurrentTime(0)
-    setDuration(0)
-
-    if (audioRef.current) {
-      audioRef.current.pause()
-      audioRef.current.currentTime = 0
-      audioRef.current.load()
-    }
-  }, [episode.id])
 
   return (
     <main className="episode-player">

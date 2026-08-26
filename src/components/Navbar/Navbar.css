@@ -196,6 +196,11 @@
 .navbar__actions {
   display: flex;
   align-items: center;
+  position: relative;
+}
+
+.navbar__profile-wrapper {
+  position: relative;
 }
 
 .navbar__profile {
@@ -219,6 +224,35 @@
 }
 
 .navbar__profile:hover {
+  background: #f5f5f5;
+}
+
+.navbar__profile-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border: 1px solid #e7e7e7;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  z-index: 20;
+}
+
+.navbar__menu-item {
+  border: none;
+  background: white;
+  color: #333;
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.navbar__menu-item:hover {
   background: #f5f5f5;
 }
 

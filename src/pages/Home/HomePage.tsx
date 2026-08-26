@@ -1,22 +1,16 @@
+import { useSelector } from 'react-redux'
+
 import StoryRail from '../../components/StoryRail/StoryRail'
-import { stories } from '../../jsonFiles/stories'
+import type { RootState } from '../../app/store'
 
 import './HomePage.css'
 
 function HomePage() {
-  // =========================================
-  // TOP PICKS
-  // Highest rated stories first
-  // =========================================
+  const stories = useSelector((state: RootState) => state.stories.items)
 
   const topPicks = [...stories].sort(
     (a, b) => Number(b.rating) - Number(a.rating)
   )
-
-  // =========================================
-  // PLAY COUNT
-  // Converts 1.2M / 980K into numbers
-  // =========================================
 
   const getPlayCount = (plays: string): number => {
     const value = parseFloat(plays)
@@ -32,18 +26,9 @@ function HomePage() {
     return value
   }
 
-  // =========================================
-  // POPULAR STORIES
-  // Highest plays first
-  // =========================================
-
   const popularStories = [...stories].sort(
     (a, b) => getPlayCount(b.plays) - getPlayCount(a.plays)
   )
-
-  // =========================================
-  // CATEGORY STORIES
-  // =========================================
 
   const adventureStories = stories.filter(
     (story) => story.subcategory.toLowerCase() === 'adventure'
@@ -67,87 +52,28 @@ function HomePage() {
 
   return (
     <main className="pocket-home">
-
-      {/* =========================================
-          TOP PICKS
-      ========================================= */}
-
-      <StoryRail
-        title="Top Picks for You"
-        stories={topPicks}
-        showTopBadge
-      />
-
-      {/* =========================================
-          POPULAR STORIES
-      ========================================= */}
-
-      <StoryRail
-        title="Popular on OUR Stories"
-        stories={popularStories}
-        showCategory
-      />
-
-      {/* =========================================
-          ADVENTURE STORIES
-      ========================================= */}
+      <StoryRail title="Top Picks for You" stories={topPicks} showTopBadge />
+      <StoryRail title="Popular on OUR Stories" stories={popularStories} showCategory />
 
       {adventureStories.length > 0 && (
-        <StoryRail
-          title="Adventure Stories"
-          stories={adventureStories}
-          showCategory
-        />
+        <StoryRail title="Adventure Stories" stories={adventureStories} showCategory />
       )}
-
-      {/* =========================================
-          FANTASY STORIES
-      ========================================= */}
 
       {fantasyStories.length > 0 && (
-        <StoryRail
-          title="Fantasy Stories"
-          stories={fantasyStories}
-          showCategory
-        />
+        <StoryRail title="Fantasy Stories" stories={fantasyStories} showCategory />
       )}
-
-      {/* =========================================
-          MAGIC STORIES
-      ========================================= */}
 
       {magicStories.length > 0 && (
-        <StoryRail
-          title="Magic Stories"
-          stories={magicStories}
-          showCategory
-        />
+        <StoryRail title="Magic Stories" stories={magicStories} showCategory />
       )}
-
-      {/* =========================================
-          DRAMA STORIES
-      ========================================= */}
 
       {dramaStories.length > 0 && (
-        <StoryRail
-          title="Drama Stories"
-          stories={dramaStories}
-          showCategory
-        />
+        <StoryRail title="Drama Stories" stories={dramaStories} showCategory />
       )}
-
-      {/* =========================================
-          COMEDY STORIES
-      ========================================= */}
 
       {comedyStories.length > 0 && (
-        <StoryRail
-          title="Comedy Stories"
-          stories={comedyStories}
-          showCategory
-        />
+        <StoryRail title="Comedy Stories" stories={comedyStories} showCategory />
       )}
-
     </main>
   )
 }
