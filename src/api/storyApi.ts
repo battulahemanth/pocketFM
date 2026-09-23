@@ -1,0 +1,45 @@
+import type { Story } from '../types/story'
+
+const request = async <T>(url: string, options?: RequestInit): Promise<T> => {
+  const response = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      ...options?.headers,
+    },
+    ...options,
+  })
+
+  const body = (await response.json().catch(() => null)) as T | { message?: string } | null
+
+  if (!response.ok) {
+    const message = body && typeof body === 'object' && 'message' in body
+      ? body.message
+      : undefined
+    throw new Error(message ?? `Request failed with status ${response.status}`)
+  }
+
+  return body as T
+}
+
+export const getStories = (): Promise<Story[]> =>
+  request<Story[]>('/api/stories')
+
+export const createStory = async (story: Story): Promise<Story> => {
+  const response = await request<{ data: Story }>('/api/stories', {
+    method: 'POST',
+    body: JSON.stringify(story),
+  })
+
+  return response.data
+}
+
+export const updateStoryApi = (story: Story): Promise<Story> =>
+  request<Story>(`/api/stories/${encodeURIComponent(story.id)}`, {
+    method: 'PUT',
+    body: JSON.stringify(story),
+  })
+
+export const deleteStoryApi = (storyId: string): Promise<void> =>
+  request<void>(`/api/stories/${encodeURIComponent(storyId)}`, {
+    method: 'DELETE',
+  })

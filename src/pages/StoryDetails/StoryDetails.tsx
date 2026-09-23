@@ -1,10 +1,12 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import { stories } from '../../jsonFiles/stories'
+import { useSelector } from 'react-redux'
+import type { RootState } from '../../app/store'
 import './StoryDetails.css'
 
 function StoryDetails() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
+  const stories = useSelector((state: RootState) => state.stories.items)
 
   const story = stories.find((item) => item.id === id)
 

@@ -10,8 +10,8 @@ export type Story = {
   id: string
   title: string
   author: string
-  rating: string
-  plays: string
+  rating: number
+  plays: number
   image: string
   category: string
   subcategory: string

@@ -1,179 +1,141 @@
 import type { Story } from '../types/story'
 
-const story1 = '/images/story1.png'
-const story2 = '/images/story2.png'
-const story3 = '/images/story3.png'
-const story4 = '/images/story4.png'
-const story5 = '/images/story5.png'
 
 export const stories: Story[] = [
   {
     id: '1',
-    title: 'Kesi Krishna',
+    title: 'panchatantra కథలు',
     author: 'Hemanth',
-    rating: '4.8',
-    plays: '1.2M',
-    image: story1,
-    category: 'Fantasy',
-    subcategory: 'Adventure',
+    rating: 4.8,
+    plays: 1200000,
+    image: '',
+    category: 'moral',
+    subcategory: 'animal',
     description:
-      'A mysterious magical journey begins when Krishna discovers a hidden power connected to an ancient secret.',
+      'the moral stories for children are a collection of short stories that teach valuable life lessons and ethical values. These stories often feature animals as characters and convey important messages about honesty, kindness, friendship, and other virtues.',
 
     episodes: [
       {
         id: 'ep1',
-        title: 'The Mysterious Beginning',
-        duration: '18:25',
-        audioUrl: '/audio/story1.mp3',
+        title: '',
+        duration: '0:58',
+        audioUrl: '/audio/Stories/Moral Stories/ఏనుగు – కుందేళ్లు.wav',
         locked: false,
       },
       {
         id: 'ep2',
-        title: 'The Mystical Power',
-        duration: '21:10',
-        audioUrl: '/audio/story2.mp3',
+        title: 'ఏనుగు-చీమ  కథ',
+        duration: '0:47',
+        audioUrl: '/audio/Stories/Moral Stories/ఏనుగు – చీమలు.wav',
         locked: false,
       },
       {
         id: 'ep3',
-        title: 'The Secret Temple',
-        duration: '19:45',
-        audioUrl: '/audio/story3.mp3',
+        title: 'కాకి-నక్క కథ',
+        duration: '0:43',
+        audioUrl: '/audio/Stories/Moral Stories/కాకి – నక్క.wav',
         locked: false,
       },
       {
         id: 'ep4',
-        title: 'The Ancient Ring',
-        duration: '22:30',
-        audioUrl: '/audio/episode-4.mp3',
+        title: 'కుక్క-ప్రతిబింబం కథ',
+        duration: '0:42 ',
+        audioUrl: '/audio/Stories/Moral Stories/కుక్క – ప్రతిబింబం.wav',
         locked: true,
       },
       {
         id: 'ep5',
-        title: 'The First Challenge',
-        duration: '25:15',
-        audioUrl: '/audio/episode-5.mp3',
+        title: 'కోతి-మొసలి కథ',
+        duration: '0:57',
+        audioUrl: '/audio/Stories/Moral Stories/కోతి – మొసలి.wav',
         locked: true,
       },
-    ],
-  },
-
-  {
-    id: '2',
-    title: 'The Magical Ring',
-    author: 'Hemanth',
-    rating: '4.7',
-    plays: '980K',
-    image: story2,
-    category: 'Fantasy',
-    subcategory: 'Magic',
-    description:
-      'An ancient ring holds a mysterious power that changes everything.',
-
-    episodes: [
       {
         id: 'ep6',
-        title: 'The Ancient Secret',
-        duration: '20:10',
-        audioUrl: '/audio/episode-6.mp3',
-        locked: false,
+        title: 'తాబేలు-రెండు హంసలు కథ',
+        duration: '1:01',
+        audioUrl: '/audio/Stories/Moral Stories/తాబేలు – రెండు హంసలు.wav',
+        locked: true,
       },
       {
         id: 'ep7',
-        title: 'The Hidden Power',
-        duration: '23:20',
-        audioUrl: '/audio/episode-7.mp3',
+        title: 'మేక-నక్క కథ',
+        duration: '0:49',
+        audioUrl: '/audio/Stories/Moral Stories/మేక – నక్క.wav',
         locked: true,
       },
-    ],
-  },
-
-  {
-    id: '3',
-    title: 'Forest Mystery',
-    author: 'Hemanth',
-    rating: '4.6',
-    plays: '750K',
-    image: story3,
-    category: 'Drama',
-    subcategory: 'Comedy',
-    description:
-      'A group of friends enter a mysterious forest and discover something unexpected.',
-
-    episodes: [
       {
         id: 'ep8',
-        title: 'Into the Forest',
-        duration: '17:30',
-        audioUrl: '/audio/episode-8.mp3',
-        locked: false,
-      },
-      {
-        id: 'ep9',
-        title: 'The Dark Path',
-        duration: '20:45',
-        audioUrl: '/audio/episode-9.mp3',
+        title: 'రెండు పక్షులు-వేటగాడు  కథ',
+        duration: '0:53',
+        audioUrl: '/audio/Stories/Moral Stories/రెండు పక్షులు – వేటగాడు.wav',
         locked: true,
       },
-    ],
-  },
-
-  {
-    id: '4',
-    title: 'Forest Mystery',
-    author: 'Hemanth',
-    rating: '4.6',
-    plays: '750K',
-    image: story4,
-    category: 'Drama',
-    subcategory: 'Comedy',
-    description:
-      'A group of friends enter a mysterious forest and discover something unexpected.',
-
-    episodes: [
-      {
-        id: 'ep8',
-        title: 'Into the Forest',
-        duration: '17:30',
-        audioUrl: '/audio/episode-8.mp3',
-        locked: false,
-      },
-      {
+      { 
         id: 'ep9',
-        title: 'The Dark Path',
-        duration: '20:45',
-        audioUrl: '/audio/episode-9.mp3',
+        title: 'సింహం-ఎలుక కథ',
+        duration: '0:53',
+        audioUrl: '/audio/Stories/Moral Stories/సింహం – ఎలుక.wav',
         locked: true,
       },
+      {
+        id: 'ep10',
+        title: 'కాకి-పాము కథ',
+        duration: '0:53',
+        audioUrl: '/audio/Stories/Moral Stories/కాకి – పాము.wav',
+        locked: true,
+      }
     ],
   },
   {
-    id: '5 ',
-    title: 'Forest Mystery',
+    id: '2',
+    title: 'తినాలి రామకృష్ణ కథలు',
     author: 'Hemanth',
-    rating: '4.6',
-    plays: '750K',
-    image: story5,
-    category: 'Drama',
-    subcategory: 'Comedy',
+    rating: 4.8,
+    plays: 1200000,
+    image: '',
+    category: 'moral',
+    subcategory: 'animal',
     description:
-      'A group of friends enter a mysterious forest and discover something unexpected.',
+      'tenaliramakrishna kathalu  ',
 
     episodes: [
       {
-        id: 'ep8',
-        title: 'Into the Forest',
-        duration: '17:30',
-        audioUrl: '/audio/episode-8.mp3',
+        id: 'ep1',
+        title: 'అత్యంత విలువైన వస్తువు కథ',
+        duration: '0:58',
+        audioUrl: '/audio/Stories/kids stories/అత్యంత విలువైన వస్తువు. wav',
         locked: false,
       },
       {
-        id: 'ep9',
-        title: 'The Dark Path',
-        duration: '20:45',
-        audioUrl: '/audio/episode-9.mp3',
+        id: 'ep2',
+        title: 'గడిదకు రాజబావన గౌరవం కథ',
+        duration: '0:47',
+        audioUrl: '/audio/Stories/kids Stories/గడిదకు రాజబావన గౌరవం.wav',
+        locked: false,
+      },
+      {
+        id: 'ep3',
+        title: 'దొంగల పాఠం కథ',
+        duration: '0:43',
+        audioUrl: '/audio/Stories/kids Stories/దొంగల పాఠం.wav',
+        locked: false,
+      },
+      {
+        id: 'ep4',
+        title: 'దొంగిలించిన బంగారు గిన్నె కథ',
+        duration: '0:42 ',
+        audioUrl: '/audio/Stories/Kids Stories/దొంగిలించిన బంగారు గిన్నె.wav',
+        locked: true,
+      },
+      {
+        id: 'ep5',
+        title: 'రాజు ఇచ్చిన వింత శిక్ష కథ',
+        duration: '0:57',
+        audioUrl: '/audio/Stories/Kids  Stories/రాజు ఇచ్చిన వింత శిక్ష.wav',
         locked: true,
       },
     ],
   },
+ 
 ]

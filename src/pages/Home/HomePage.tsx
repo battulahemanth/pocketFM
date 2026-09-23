@@ -6,24 +6,24 @@ import type { RootState } from '../../app/store'
 import './HomePage.css'
 
 function HomePage() {
-  const stories = useSelector((state: RootState) => state.stories.items)
+  const { items: stories, status, error } = useSelector(
+    (state: RootState) => state.stories,
+  )
+
+  if (status === 'loading' || status === 'idle') {
+    return <main className="pocket-home">Loading stories...</main>
+  }
+
+  if (status === 'failed') {
+    return <main className="pocket-home">{error}</main>
+  }
 
   const topPicks = [...stories].sort(
     (a, b) => Number(b.rating) - Number(a.rating)
   )
 
-  const getPlayCount = (plays: string): number => {
-    const value = parseFloat(plays)
-
-    if (plays.toUpperCase().includes('M')) {
-      return value * 1_000_000
-    }
-
-    if (plays.toUpperCase().includes('K')) {
-      return value * 1_000
-    }
-
-    return value
+  const getPlayCount = (plays: number): number => {
+    return plays
   }
 
   const popularStories = [...stories].sort(
