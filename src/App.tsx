@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 
 import HomePage from './pages/Home/HomePage'
@@ -7,6 +9,8 @@ import AdminDashboard from './pages/AdminDashboard/AdminDashboard'
 
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
+import { fetchStories } from './features/stories/storySlice'
+import type { AppDispatch } from './app/store'
 
 function AppRoutes() {
   const location = useLocation()
@@ -22,6 +26,12 @@ function AppRoutes() {
 }
 
 function App() {
+  const dispatch = useDispatch<AppDispatch>()
+
+  useEffect(() => {
+    void dispatch(fetchStories())
+  }, [dispatch])
+
   return (
     <BrowserRouter>
       <Navbar onOpenProfile={() => {}} profileName="" />

@@ -1,8 +1,7 @@
 import { useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-
-import { stories } from '../../jsonFiles/stories'
-
+import { useSelector } from 'react-redux'
+import type { RootState } from '../../app/store'
 import './EpisodePlayer.css'
 
 function EpisodePlayer() {
@@ -12,6 +11,7 @@ function EpisodePlayer() {
   }>()
 
   const navigate = useNavigate()
+  const stories = useSelector((state: RootState) => state.stories.items)
 
   const audioRef = useRef<HTMLAudioElement>(null)
 

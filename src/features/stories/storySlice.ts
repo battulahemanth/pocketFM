@@ -1,16 +1,38 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
-import { stories as defaultStories } from '../../jsonFiles/stories'
+import { getStories } from '../../api/storyApi'
 import type { Story } from '../../types/story'
 
 type StoryState = {
   items: Story[]
+  status: 'idle' | 'loading' | 'succeeded' | 'failed'
+  error: string | null
 }
 
-const storedStories = localStorage.getItem('pocketfm-stories')
+const mapStoryResponse = (stories: Story[]): Story[] =>
+  stories.map((story) => ({
+    ...story,
+    episodes: story.episodes.map((episode) => ({
+      ...episode,
+      audioUrl: episode.audioUrl.replace(/\s*–\s*/g, ' – '),
+    })),
+  }))
+
+export const fetchStories = createAsyncThunk<Story[], void, { rejectValue: string }>(
+  'stories/fetchStories',
+  async (_, { rejectWithValue }) => {
+    try {
+      return mapStoryResponse(await getStories())
+    } catch (error) {
+      return rejectWithValue(error instanceof Error ? error.message : 'Failed to fetch stories')
+    }
+  },
+)
 
 const initialState: StoryState = {
-  items: storedStories ? JSON.parse(storedStories) : defaultStories,
+  items: [],
+  status: 'idle',
+  error: null,
 }
 
 const storySlice = createSlice({
@@ -19,24 +41,35 @@ const storySlice = createSlice({
   reducers: {
     setStories: (state, action: PayloadAction<Story[]>) => {
       state.items = action.payload
-      localStorage.setItem('pocketfm-stories', JSON.stringify(action.payload))
     },
     addStory: (state, action: PayloadAction<Story>) => {
       state.items = [action.payload, ...state.items]
-      localStorage.setItem('pocketfm-stories', JSON.stringify(state.items))
     },
     updateStory: (state, action: PayloadAction<Story>) => {
       const index = state.items.findIndex((story) => story.id === action.payload.id)
 
       if (index !== -1) {
         state.items[index] = action.payload
-        localStorage.setItem('pocketfm-stories', JSON.stringify(state.items))
       }
     },
     deleteStory: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((story) => story.id !== action.payload)
-      localStorage.setItem('pocketfm-stories', JSON.stringify(state.items))
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchStories.pending, (state) => {
+        state.status = 'loading'
+        state.error = null
+      })
+      .addCase(fetchStories.fulfilled, (state, action) => {
+        state.items = action.payload
+        state.status = 'succeeded'
+      })
+      .addCase(fetchStories.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.payload ?? 'Failed to fetch stories'
+      })
   },
 })
 
