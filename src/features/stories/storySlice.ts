@@ -1,53 +1,71 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
-
-import { getStories } from '../../api/storyApi'
 import type { Story } from '../../types/story'
 
-type StoryState = {
+interface StoriesState {
   items: Story[]
   status: 'idle' | 'loading' | 'succeeded' | 'failed'
   error: string | null
 }
 
-const mapStoryResponse = (stories: Story[]): Story[] =>
-  stories.map((story) => ({
-    ...story,
-    episodes: story.episodes.map((episode) => ({
-      ...episode,
-      audioUrl: episode.audioUrl.replace(/\s*–\s*/g, ' – '),
-    })),
-  }))
-
-export const fetchStories = createAsyncThunk<Story[], void, { rejectValue: string }>(
-  'stories/fetchStories',
-  async (_, { rejectWithValue }) => {
-    try {
-      return mapStoryResponse(await getStories())
-    } catch (error) {
-      return rejectWithValue(error instanceof Error ? error.message : 'Failed to fetch stories')
-    }
-  },
-)
-
-const initialState: StoryState = {
+const initialState: StoriesState = {
   items: [],
   status: 'idle',
   error: null,
 }
 
+export const fetchStories = createAsyncThunk(
+  'stories/fetchStories',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch(
+        'http://localhost:5000/api/stories/getAllStories'
+      )
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch stories: ${response.status}`
+        )
+      }
+
+      const data = await response.json()
+
+      console.log('MongoDB stories:', data)
+
+      // Backend returns:
+      // [ story1, story2, story3 ]
+      if (Array.isArray(data)) {
+        return data as Story[]
+      }
+
+      // If backend returns:
+      // { stories: [ story1, story2 ] }
+      if (Array.isArray(data.stories)) {
+        return data.stories as Story[]
+      }
+
+      throw new Error('Invalid stories response from backend')
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : 'Failed to fetch stories'
+
+      return rejectWithValue(message)
+    }
+  }
+)
+
 const storySlice = createSlice({
   name: 'stories',
+
   initialState,
+
   reducers: {
-    setStories: (state, action: PayloadAction<Story[]>) => {
-      state.items = action.payload
-    },
     addStory: (state, action: PayloadAction<Story>) => {
-      state.items = [action.payload, ...state.items]
+      state.items.push(action.payload)
     },
     updateStory: (state, action: PayloadAction<Story>) => {
       const index = state.items.findIndex((story) => story.id === action.payload.id)
-
       if (index !== -1) {
         state.items[index] = action.payload
       }
@@ -56,23 +74,33 @@ const storySlice = createSlice({
       state.items = state.items.filter((story) => story.id !== action.payload)
     },
   },
+
   extraReducers: (builder) => {
     builder
+
+      // API request started
       .addCase(fetchStories.pending, (state) => {
         state.status = 'loading'
         state.error = null
       })
+
+      // API request successful
       .addCase(fetchStories.fulfilled, (state, action) => {
-        state.items = action.payload
         state.status = 'succeeded'
+        state.items = action.payload
+        state.error = null
       })
+
+      // API request failed
       .addCase(fetchStories.rejected, (state, action) => {
         state.status = 'failed'
-        state.error = action.payload ?? 'Failed to fetch stories'
+        state.error =
+          (action.payload as string) ||
+          'Failed to fetch stories'
       })
   },
 })
 
-export const { setStories, addStory, updateStory, deleteStory } = storySlice.actions
+export const { addStory, updateStory, deleteStory } = storySlice.actions
 
 export default storySlice.reducer
