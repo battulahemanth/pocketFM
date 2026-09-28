@@ -25,19 +25,22 @@ export const getStories = (): Promise<Story[]> =>
   request<Story[]>('/api/stories')
 
 export const createStory = async (story: Story): Promise<Story> => {
-  const response = await request<{ data: Story }>('/api/stories', {
+  const response = await request<{ story: Story }>('/api/stories', {
     method: 'POST',
     body: JSON.stringify(story),
   })
 
-  return response.data
+  return response.story
 }
 
-export const updateStoryApi = (story: Story): Promise<Story> =>
-  request<Story>(`/api/stories/${encodeURIComponent(story.id)}`, {
+export const updateStoryApi = async (story: Story): Promise<Story> => {
+  const response = await request<{ story: Story }>(`/api/stories/${encodeURIComponent(story.id)}`, {
     method: 'PUT',
     body: JSON.stringify(story),
   })
+
+  return response.story
+}
 
 export const deleteStoryApi = (storyId: string): Promise<void> =>
   request<void>(`/api/stories/${encodeURIComponent(storyId)}`, {
