@@ -15,19 +15,19 @@ function HomePage() {
   }
 
   if (status === 'failed') {
-    return <main className="pocket-home">{error}</main>
+    return (
+      <main className="pocket-home">
+        {error || 'Failed to load stories'}
+      </main>
+    )
   }
 
   const topPicks = [...stories].sort(
-    (a, b) => Number(b.rating) - Number(a.rating)
+    (a, b) => Number(b.rating) - Number(a.rating),
   )
 
-  const getPlayCount = (plays: number): number => {
-    return plays
-  }
-
   const popularStories = [...stories].sort(
-    (a, b) => getPlayCount(b.plays) - getPlayCount(a.plays)
+    (a, b) => Number(b.plays) - Number(a.plays),
   )
 
   const adventureStories = stories.filter(

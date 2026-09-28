@@ -1,6 +1,6 @@
 import { useRef } from 'react'
-import type { Story } from '../../types/story'
 import StoryCard from '../StoryCard/StoryCard'
+import type { Story } from '../../types/story'
 import './StoryRail.css'
 
 type StoryRailProps = {
@@ -18,51 +18,39 @@ function StoryRail({
 }: StoryRailProps) {
   const railRef = useRef<HTMLDivElement>(null)
 
-  const scroll = (direction: 'left' | 'right') => {
-    if (!railRef.current) return
+  const scrollRail = (direction: number) => {
+    railRef.current?.scrollBy({ left: direction * 400, behavior: 'smooth' })
+  }
 
-    railRef.current.scrollBy({
-      left: direction === 'right' ? 900 : -900,
-      behavior: 'smooth',
-    })
+  if (stories.length === 0) {
+    return null
   }
 
   return (
     <section className="story-section">
-
-      <div className="story-section-header">
-
+      <header className="story-section-header">
         <h2>{title}</h2>
-
-        <div className="rail-controls">
-
+        <div className="rail-controls" aria-label={`${title} controls`}>
           <button
-            type="button"
             className="rail-arrow"
-            onClick={() => scroll('left')}
+            type="button"
             aria-label={`Scroll ${title} left`}
+            onClick={() => scrollRail(-1)}
           >
-            ‹
+            &#8249;
           </button>
-
           <button
-            type="button"
             className="rail-arrow"
-            onClick={() => scroll('right')}
+            type="button"
             aria-label={`Scroll ${title} right`}
+            onClick={() => scrollRail(1)}
           >
-            ›
+            &#8250;
           </button>
-
         </div>
+      </header>
 
-      </div>
-
-      <div
-        ref={railRef}
-        className="story-rail"
-      >
-
+      <div className="story-rail" ref={railRef}>
         {stories.map((story, index) => (
           <StoryCard
             key={story.id}
@@ -71,9 +59,7 @@ function StoryRail({
             showCategory={showCategory}
           />
         ))}
-
       </div>
-
     </section>
   )
 }
