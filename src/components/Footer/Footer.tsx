@@ -3,7 +3,7 @@ import './Footer.css'
 function Footer() {
   return (
     <footer className="footer">
-      <div className="footer__brand">PocketFM</div>
+      <div className="footer__brand">our-stories</div>
       <div className="footer__links">
         <a href="#">About</a>
         <a href="#">Contact</a>

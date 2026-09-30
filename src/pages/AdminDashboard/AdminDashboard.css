@@ -393,6 +393,7 @@
   background: #fff;
   color: #2f2452;
   font: inherit;
+  width: 100%;
 }
 
 .episode-card__remove {
