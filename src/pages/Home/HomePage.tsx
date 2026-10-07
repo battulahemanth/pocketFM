@@ -11,12 +11,12 @@ function HomePage() {
   )
 
   if (status === 'loading' || status === 'idle') {
-    return <main className="pocket-home">Loading stories...</main>
+    return <main className="our-stories-home">Loading stories...</main>
   }
 
   if (status === 'failed') {
     return (
-      <main className="pocket-home">
+      <main className="our-stories-home">
         {error || 'Failed to load stories'}
       </main>
     )
@@ -51,9 +51,9 @@ function HomePage() {
   )
 
   return (
-    <main className="pocket-home">
+    <main className="our-stories-home">
       <StoryRail title="Top Picks for You" stories={topPicks} showTopBadge />
-      <StoryRail title="Popular on OUR Stories" stories={popularStories} showCategory />
+      <StoryRail title="Popular on OUR_Stories" stories={popularStories} showCategory />
 
       {adventureStories.length > 0 && (
         <StoryRail title="Adventure Stories" stories={adventureStories} showCategory />

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { API_URL } from '../../api/config'
 import type { Story } from '../../types/story'
 
 interface StoriesState {
@@ -18,7 +19,7 @@ export const fetchStories = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        'http://localhost:5000/api/stories/getAllStories'
+        `${API_URL}/api/stories/getAllStories`
       )
 
       if (!response.ok) {
